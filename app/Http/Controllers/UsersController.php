@@ -8,8 +8,6 @@ use App\User;
 use App\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\Types\Integer;
-use phpDocumentor\Reflection\Types\Null_;
 
 class UsersController extends Controller
 {
@@ -164,4 +162,10 @@ class UsersController extends Controller
         User::find($id)->delete();
         return response()->json(['done']);
     }
+
+    public function usersList(){
+        $users=Users::all();
+        return response()->json($users);
+    }
+
 }

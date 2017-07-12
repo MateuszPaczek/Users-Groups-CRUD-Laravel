@@ -118,7 +118,7 @@
                                         <label for="@{{ group }}">@{{ group }}</label>
                                 </span>
                             <br>
-                            <span>Checked groups: @{{ checkedGroups }}</span>
+                            <span style="word-wrap: break-word">Checked groups: @{{ checkedGroups }}</span>
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success">Submit</button>
@@ -187,7 +187,7 @@
                                         <label for="@{{ group }}">@{{ group }}</label>
                                     </span>
                             <br>
-                            <span>Checked groups: @{{ checkedGroups }}</span>
+                            <span style="word-wrap: break-word">Checked groups: @{{ checkedGroups }}</span>
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success">Submit</button>

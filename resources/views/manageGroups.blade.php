@@ -82,7 +82,7 @@
 										<label for="@{{ user }}">@{{ user }}</label>
 								</span>
 							<br>
-							<span>Checked users: @{{ checkedUsers }}</span>
+							<span style="word-wrap: break-word">Checked users: @{{ checkedUsers }}</span>
 
 							<div class="form-group">
 								<button type="submit" class="btn btn-success">Submit</button>
@@ -103,7 +103,7 @@
 						<button type="button" class="close" data-dismiss="modal">
 							<span aria-hidden="true">×</span>
 						</button>
-						<h4 class="modal-title" id="EditModalLabel">Edit user</h4>
+						<h4 class="modal-title" id="EditModalLabel">Edit group</h4>
 					</div>
 					<div class="modal-body">
 						<form method="post" enctype="multipart/form-data" v-on:submit.prevent="updateGroup(fillGroup.id)">
@@ -121,7 +121,7 @@
 										<label for="@{{ user }}">@{{ user }}</label>
 								</span>
 							<br>
-							<span>Checked users: @{{ checkedUsers }}</span>
+							<span style="word-wrap: break-word">Checked users: @{{ checkedUsers }}</span>
 
 
 							<div class="form-group">

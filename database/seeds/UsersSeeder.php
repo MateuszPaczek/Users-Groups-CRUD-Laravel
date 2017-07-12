@@ -15,7 +15,7 @@ class UsersSeeder extends Seeder
         $faker = Faker\Factory::create();
 
 
-        for ($i = 0; $i < 2; $i++) {
+        for ($i = 0; $i < 15; $i++) {
 
             $user = new Users();
             $user->userName = $faker->userName;
@@ -24,8 +24,8 @@ class UsersSeeder extends Seeder
             $user->lastName = $faker->lastName;
             $user->dateOfbirth = $faker->date();
             $user->save();
-            $user->groups()->attach(3);
-            $user->groups()->attach(1);
+            $user->groups()->attach(random_int(1,3));
+
 
         }
     }

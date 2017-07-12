@@ -52,8 +52,8 @@ new Vue({
     methods: {
         getVueGroups: function (page) {
 
-            this.$http.get('/users').then((response) => {
-                this.$set('usersName', response.data.data.data);
+            this.$http.get('/userslist').then((response) => {
+                this.$set('usersName', response.data);
                 for( i=0;i<this.usersName.length;i++){
                     this.users.push(this.usersName[i].userName);
                 }
@@ -67,7 +67,7 @@ new Vue({
 
         },
         createGroup: function () {
-            var input = this.newGroup;
+            const input = this.newGroup;
             this.newGroup.usersNames = this.checkedUsers.toString();
             this.$http.post('/groups', input).then((response) => {
                 this.changePage(this.pagination.current_page);

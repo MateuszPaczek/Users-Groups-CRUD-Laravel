@@ -47,6 +47,8 @@ class GroupsController extends Controller
         return response()->json($response);
     }
 
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -147,5 +149,11 @@ class GroupsController extends Controller
 
         Groups::find($id)->delete();
         return response()->json(['done']);
+    }
+
+    public function groupsList(){
+
+        $groups = Groups::all();
+        return response()->json($groups);
     }
 }

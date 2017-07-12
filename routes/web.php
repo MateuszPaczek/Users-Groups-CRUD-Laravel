@@ -17,10 +17,12 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['web']], function() {
     Route::get('/manageusers', 'UsersController@manage');
+    Route::get('/userslist', 'UsersController@usersList');
     Route::resource('/users','UsersController');
 });
 
 Route::group(['middleware' => ['web']], function() {
     Route::get('/managegroups', 'GroupsController@manage');
+    Route::get('/groupslist', 'GroupsController@groupsList');
     Route::resource('/groups','GroupsController');
 });

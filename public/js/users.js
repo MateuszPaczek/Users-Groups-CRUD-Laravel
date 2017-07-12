@@ -54,8 +54,8 @@ new Vue({
     methods: {
         getVueUsers: function (page) {
 
-            this.$http.get('/groups').then((response) => {
-                this.$set('groupsName', response.data.data.data);
+            this.$http.get('/groupslist').then((response) => {
+                this.$set('groupsName', response.data);
                 for( i=0;i<this.groupsName.length;i++){
                     this.groups.push(this.groupsName[i].groupName);
                 }
