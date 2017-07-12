@@ -15,7 +15,7 @@ class UsersSeeder extends Seeder
         $faker = Faker\Factory::create();
 
 
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 1; $i++) {
 
             $user = new Users();
             $user->userName = $faker->userName;

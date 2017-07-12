@@ -17,7 +17,6 @@ class Users extends Model
         'userName', 'password', 'firstName', 'lastName', 'dateOfBirth'
     ];
 
-
     public function groups(){
         return $this->belongsToMany(Groups::class, 'groups_has_users', 'users_id',
             'groups_id')->withTimestamps();

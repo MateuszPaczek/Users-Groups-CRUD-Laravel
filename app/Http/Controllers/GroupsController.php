@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\DB;
 class GroupsController extends Controller
 {
 
-    public function manage(){
+    public function manage()
+    {
 
         return view('manageGroups');
     }
@@ -25,10 +26,11 @@ class GroupsController extends Controller
     {
 
         $groups = DB::table('groups')
-            ->leftJoin('groups_has_users','groups_has_users.groups_id', "=", 'groups.id')
+            ->leftJoin('groups_has_users', 'groups_has_users.groups_id', "=", 'groups.id')
             ->leftJoin('users', 'groups_has_users.users_id', '=', 'users.id')
-            ->select('groups.id','groups.groupName')
+            ->select('groups.id', 'groups.groupName')
             ->selectRaw('GROUP_CONCAT(users.userName) as usersNames')
+            ->selectRaw('GROUP_CONCAT(users.id) as usersId')
             ->groupBy('groups.id', 'groups.groupName')
             ->orderBy('groups.id', 'ASC')
             ->paginate(10);
@@ -47,8 +49,6 @@ class GroupsController extends Controller
         return response()->json($response);
     }
 
-
-
     /**
      * Show the form for creating a new resource.
      *
@@ -62,33 +62,33 @@ class GroupsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $this->validate($request, [
-            'groupName' => 'required'
+            'groupName' => 'required|unique:groups'
         ]);
 
         $group = new Groups();
         $group->groupName = $request->get('groupName');
         $group->save();
 
-        $users=Users::all();
-        foreach ($users as $user){
-            if (strpos($request->get('usersNames'), $user->userName) !== false) {
+        if ($request->get('usersNames') != NULL) {
+            $usersIds = explode(',', $request->get('usersNames'));
+            foreach ($usersIds as $userId) {
+                $user = Users::find($userId);
                 $user->groups()->attach($group->id);
             }
         }
-
         return response()->json($group);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -99,7 +99,7 @@ class GroupsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -110,33 +110,38 @@ class GroupsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
+
         $this->validate($request, [
-            'groupName' => 'required'
+            'groupName' => 'required|unique:groups,groupName,' . $id
         ]);
 
         $edit = Groups::find($id)->update($request->all());
 
-        $users=Users::all();
-        foreach ($users as $user){
+        $users = Users::all();
+        foreach ($users as $user) {
             $user->groups()->detach($id);
-            if (strpos($request->get('usersNames'), $user->userName) !== false) {
+
+        }
+        if ($request->get('usersNames') != NULL) {
+            $usersId = explode(',', $request->get('usersNames'));
+            foreach ($usersId as $userId) {
+                $user = Users::find($userId);
                 $user->groups()->attach($id);
             }
         }
-
         return response()->json($edit);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -144,14 +149,15 @@ class GroupsController extends Controller
 
         $groups = GroupsHasUsers::all();
         foreach ($groups as $group)
-            if($group->groups_id == $id)
+            if ($group->groups_id == $id)
                 $group->delete();
 
         Groups::find($id)->delete();
         return response()->json(['done']);
     }
 
-    public function groupsList(){
+    public function groupsList()
+    {
 
         $groups = Groups::all();
         return response()->json($groups);

@@ -114,11 +114,11 @@
 
                             <label for="groupName">Groups:</label>
                                 <span v-for="group in groups">
-                                    <input type="checkbox" id="@{{ group }}" value="@{{ group }}" v-model="checkedGroups"/>
-                                        <label for="@{{ group }}">@{{ group }}</label>
+                                    <input type="checkbox" id="@{{ group.id }}" value="@{{ group.id }}"
+                                           v-model="checkedGroups"/>
+                                        <label for="@{{ group.id }}">@{{ group.groupName }}</label>
                                 </span>
-                            <br>
-                            <span style="word-wrap: break-word">Checked groups: @{{ checkedGroups }}</span>
+
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success">Submit</button>
@@ -175,19 +175,19 @@
 
                             <div class="form-group">
                                 <label for="dateOfBirth">Date of birth:</label>
-                                <input  type="date" name="dateOfBirth" class="form-control" v-model="fillUser.dateOfBirth"/>
+                                <input  type="date" name="dateOfBirth" class="form-control"
+                                        v-model="fillUser.dateOfBirth"/>
                                 <span v-if="formErrorsUpdate['dateOfBirth']" class="error text-danger">
                                     @{{ formErrorsUpdate['dateOfBirth'] }}</span>
                             </div>
 
                             <label for="groupName">Groups:</label>
                             <span v-for="group in groups">
-                                        <input type="checkbox" id="@{{ group }}" value="@{{ group }}"
-                                               v-model="checkedGroups"/>
-                                        <label for="@{{ group }}">@{{ group }}</label>
-                                    </span>
-                            <br>
-                            <span style="word-wrap: break-word">Checked groups: @{{ checkedGroups }}</span>
+                                    <input type="checkbox" id="@{{ group.id }}" value="@{{ group.id }}"
+                                           v-model="checkedGroups"/>
+                                        <label for="@{{ group.id }}">@{{ group.groupName }}</label>
+                                </span>
+
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success">Submit</button>

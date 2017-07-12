@@ -15,11 +15,10 @@ new Vue({
         formErrorsUpdate: {},
         groups: [],
         checkedGroups: [],
-        groupsName: [],
         newUser: {'userName': '', 'password': '', 'firstName': '', 'lastName': '', 'dateOfBirth': '', 'groupName': ''},
         fillUser: {
-            'userName': '', 'password': '', 'firstName': '', 'lastName': '', 'dateOfBirth': '', 'groupName': '',
-            'id': ''
+            'userName': '', 'password': '', 'firstName': '', 'lastName': '', 'dateOfBirth': '', 'groupName': '', 'id': '',
+
         }
     },
     computed: {
@@ -30,15 +29,15 @@ new Vue({
             if (!this.pagination.to) {
                 return [];
             }
-            var from = this.pagination.current_page - this.offset;
+            let from = this.pagination.current_page - this.offset;
             if (from < 1) {
                 from = 1;
             }
-            var to = from + (this.offset * 2);
+            let to = from + (this.offset * 2);
             if (to >= this.pagination.last_page) {
                 to = this.pagination.last_page;
             }
-            var pagesArray = [];
+            let pagesArray = [];
             while (from <= to) {
                 pagesArray.push(from);
                 from++;
@@ -48,27 +47,22 @@ new Vue({
     },
 
     ready: function () {
-        this.getVueUsers(this.pagination.current_page);
+        this.getData(this.pagination.current_page);
 
     },
     methods: {
-        getVueUsers: function (page) {
-
+        getData: function (page) {
             this.$http.get('/groupslist').then((response) => {
-                this.$set('groupsName', response.data);
-                for( i=0;i<this.groupsName.length;i++){
-                    this.groups.push(this.groupsName[i].groupName);
-                }
+                this.$set('groups', response.data);
             });
 
             this.$http.get('/users?page=' + page).then((response) => {
                 this.$set('users', response.data.data.data);
                 this.$set('pagination', response.data.pagination);
             });
-
         },
         createUser: function () {
-            var input = this.newUser;
+            const input = this.newUser;
             this.newUser.groupName = this.checkedGroups.toString();
             this.$http.post('/users', input).then((response) => {
                 this.changePage(this.pagination.current_page);
@@ -97,13 +91,13 @@ new Vue({
             this.fillUser.lastName = user.lastName;
             this.fillUser.groupName = user.groupName;
             if(user.groupName)
-            this.checkedGroups = user.groupName.split(",")
+            this.checkedGroups = user.groupId.split(",")
             this.fillUser.dateOfBirth = user.dateOfBirth;
             $("#edit-user").modal('show');
         },
         updateUser: function (id) {
             this.fillUser.groupName = this.checkedGroups.toString();
-            var input = this.fillUser;
+            const input = this.fillUser;
             this.$http.put('/users/' + id, input).then((response) => {
                 this.changePage(this.pagination.current_page);
                 this.newUser = {
@@ -119,7 +113,7 @@ new Vue({
         },
         changePage: function (page) {
             this.pagination.current_page = page;
-            this.getVueUsers(page);
+            this.getData(page);
         }
     }
 });

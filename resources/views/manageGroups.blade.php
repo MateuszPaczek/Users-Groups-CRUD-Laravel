@@ -77,12 +77,12 @@
 							</div>
 
 							<label for="usersNames">Users:</label>
-								<span v-for="user in users">
-									<input type="checkbox" id="@{{ user }}" value="@{{ user }}" v-model="checkedUsers"/>
-										<label for="@{{ user }}">@{{ user }}</label>
+								<span v-for="user in usersName">
+									<input type="checkbox" id="@{{ user.id }}" value="@{{ user.id }}"
+										   v-model="checkedUsersId"/>
+										<label for="@{{ user.id }}">@{{ user.userName }}</label>
 								</span>
-							<br>
-							<span style="word-wrap: break-word">Checked users: @{{ checkedUsers }}</span>
+
 
 							<div class="form-group">
 								<button type="submit" class="btn btn-success">Submit</button>
@@ -116,12 +116,12 @@
 							</div>
 
 							<label for="usersNames">Users:</label>
-							<span v-for="user in users">
-									<input type="checkbox" id="@{{ user }}" value="@{{ user }}" v-model="checkedUsers"/>
-										<label for="@{{ user }}">@{{ user }}</label>
+							<span v-for="user in usersName">
+									<input type="checkbox" id="@{{ user.id }}" value="@{{ user.id }}"
+										   v-model="checkedUsersId"/>
+										<label for="@{{ user.id }}">@{{ user.userName }}</label>
 								</span>
-							<br>
-							<span style="word-wrap: break-word">Checked users: @{{ checkedUsers }}</span>
+
 
 
 							<div class="form-group">
