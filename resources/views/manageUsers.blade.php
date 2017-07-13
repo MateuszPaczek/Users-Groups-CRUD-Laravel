@@ -119,7 +119,6 @@
                                         <label for="@{{ group.id }}">@{{ group.groupName }}</label>
                                 </span>
 
-
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success">Submit</button>
                             </div>

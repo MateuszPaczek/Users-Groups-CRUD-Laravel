@@ -24,7 +24,6 @@ class GroupsController extends Controller
      */
     public function index()
     {
-
         $groups = DB::table('groups')
             ->leftJoin('groups_has_users', 'groups_has_users.groups_id', "=", 'groups.id')
             ->leftJoin('users', 'groups_has_users.users_id', '=', 'users.id')

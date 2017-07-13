@@ -18,7 +18,6 @@ new Vue({
         newUser: {'userName': '', 'password': '', 'firstName': '', 'lastName': '', 'dateOfBirth': '', 'groupName': ''},
         fillUser: {
             'userName': '', 'password': '', 'firstName': '', 'lastName': '', 'dateOfBirth': '', 'groupName': '', 'id': '',
-
         }
     },
     computed: {

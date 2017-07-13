@@ -14,7 +14,6 @@ class UsersController extends Controller
 
     public function manage()
     {
-
         return view('manageUsers');
     }
 

@@ -67,7 +67,6 @@
 					</div>
 
 					<div class="modal-body">
-
 						<form method="post" enctype="multipart/form-data" v-on:submit.prevent="createGroup">
 							<div class="form-group">
 								<label for="groupName">Group name:</label>
@@ -82,7 +81,6 @@
 										   v-model="checkedUsersId"/>
 										<label for="@{{ user.id }}">@{{ user.userName }}</label>
 								</span>
-
 
 							<div class="form-group">
 								<button type="submit" class="btn btn-success">Submit</button>
@@ -105,6 +103,7 @@
 						</button>
 						<h4 class="modal-title" id="EditModalLabel">Edit group</h4>
 					</div>
+
 					<div class="modal-body">
 						<form method="post" enctype="multipart/form-data" v-on:submit.prevent="updateGroup(fillGroup.id)">
 
@@ -121,8 +120,6 @@
 										   v-model="checkedUsersId"/>
 										<label for="@{{ user.id }}">@{{ user.userName }}</label>
 								</span>
-
-
 
 							<div class="form-group">
 								<button type="submit" class="btn btn-success">Submit</button>

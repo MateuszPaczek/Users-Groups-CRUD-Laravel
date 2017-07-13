@@ -50,17 +50,14 @@ new Vue({
     },
     methods: {
         getData: function (page) {
-
             this.$http.get('/userslist').then((response) => {
                 this.$set('usersName', response.data);
             });
-
 
             this.$http.get('/groups?page=' + page).then((response) => {
                 this.$set('groups', response.data.data.data);
                 this.$set('pagination', response.data.pagination);
             });
-
         },
         createGroup: function () {
             const input = this.newGroup;
